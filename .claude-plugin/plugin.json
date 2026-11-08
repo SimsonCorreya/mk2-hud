@@ -1,0 +1,20 @@
+{
+  "name": "mark-2-hud",
+  "version": "1.0.0",
+  "description": "Mark-2 HUD: a heads-up display above the Claude Code prompt. Reads Claude's replies aloud with a local Piper voice, tracks the plan and its subagents, and shows turn, speed, cost, prompt cache and context.",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "planReports": {
+      "type": "boolean",
+      "title": "Ask Claude to report its plans",
+      "description": "Adds a short note to Claude's system prompt so it reports multi-step work to the mission row; off, the row follows only task lists and subagents",
+      "default": true
+    }
+  },
+  "author": {
+    "name": "Simson Correya"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/SimsonCorreya/mark-2-hud",
+  "homepage": "https://github.com/SimsonCorreya/mark-2-hud"
+}

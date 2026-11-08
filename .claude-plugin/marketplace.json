@@ -1,0 +1,12 @@
+{
+  "name": "mark-2-hud",
+  "owner": {
+    "name": "Simson Correya"
+  },
+  "plugins": [
+    {
+      "name": "mark-2-hud",
+      "source": "./"
+    }
+  ]
+}
