@@ -2,9 +2,9 @@
 
 A heads-up display above the [Claude Code](https://claude.com/claude-code) prompt. It reads Claude's replies aloud in a local neural voice, shows the plan as it progresses, and keeps turn, cost, prompt cache and context in view.
 
-![Mark-2 HUD above the prompt: a helmet mascot beside mission, telemetry and voice rows](docs/preview.png)
+![Mark-2 HUD above the prompt: a helmet mascot beside the mission plates, telemetry cells and voice controls](docs/preview.png)
 
-*Mockup of the HUD using the mod's real helmet drawing. The numbers and text are examples.*
+*Mockup drawn with the HUD's own rendering code. The numbers and text are examples.*
 
 > Free, unofficial fan project. Not affiliated with or endorsed by Marvel or Anthropic. See [Licence](#licence).
 
