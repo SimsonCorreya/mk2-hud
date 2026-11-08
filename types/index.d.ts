@@ -39,7 +39,7 @@ export type HudSettings = {
   areStatsShown: boolean
   /**
    * How to say words the voice gets wrong, by the word in lower case:
-   * `{ novakitai: 'nova kit A I' }`. Set with `/mark-2-hud say`.
+   * `{ novakitai: 'nova kit A I' }`. Set with `/mk2-hud say`.
    */
   pronunciations: Record<string, string>
   /**
@@ -184,7 +184,7 @@ export type Cache = {
 
 declare module 'claude-code' {
   interface PluginState {
-    'mark-2-hud': {
+    'mk2-hud': {
       player: VoicePlayer
       settings: HudSettings
       voices: string[]

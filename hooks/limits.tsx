@@ -11,11 +11,11 @@ import { CACHE, HOLD, STATS, WARM } from './state'
 import { cacheLevel } from './telemetry'
 import { LIMITS_PANE, MAX_PINGS, pauseNow, setShield, setShieldAt, setWarm, triggerPoint } from './warm'
 
-const cache = atom({ plugin: 'mark-2-hud', key: 'cache' } as const, CACHE)
-const hold = atom({ plugin: 'mark-2-hud', key: 'hold' } as const, HOLD)
-const isBusy = atom({ plugin: 'mark-2-hud', key: 'isBusy' } as const, false)
-const stats = atom({ plugin: 'mark-2-hud', key: 'stats' } as const, STATS)
-const warm = atom({ plugin: 'mark-2-hud', key: 'warm' } as const, WARM)
+const cache = atom({ plugin: 'mk2-hud', key: 'cache' } as const, CACHE)
+const hold = atom({ plugin: 'mk2-hud', key: 'hold' } as const, HOLD)
+const isBusy = atom({ plugin: 'mk2-hud', key: 'isBusy' } as const, false)
+const stats = atom({ plugin: 'mk2-hud', key: 'stats' } as const, STATS)
+const warm = atom({ plugin: 'mk2-hud', key: 'warm' } as const, WARM)
 
 type On = Parameters<Register>[0]
 
@@ -217,15 +217,15 @@ export function registerLimits(on: On): void {
           {status('shield-now-text', shieldNow)}
         </Box>
 
-        {note('usage-other', 'OTHER MARK-2 HUD FEATURES THAT USE TOKENS', HUD.muted, [
-          '• Learn new words: unusual words in a reply are sent to Haiku to ask how to say them, a small request that counts toward your usage. Off in ⋯ → Learn new words, or /mark-2-hud learn off.',
+        {note('usage-other', 'OTHER MK2-HUD FEATURES THAT USE TOKENS', HUD.muted, [
+          '• Learn new words: unusual words in a reply are sent to Haiku to ask how to say them, a small request that counts toward your usage. Off in ⋯ → Learn new words, or /mk2-hud learn off.',
           '• Summary reading: Haiku condenses the reply before it is read, one small request each time. Read: Full reply in ⋯ uses none.',
           "• Plan reports: a short note in Claude's instructions asks it to report multi-step work to the mission row, adding a little to each request and a tool call per step. Off in the plugin's settings (Ask Claude to report its plans).",
         ])}
         {note('usage-free', '✓ FREE: RUNS ON YOUR COMPUTER ONLY', HUD.cyan, [
           'These use no tokens and never touch your session or weekly limits, only your computer:',
           '• Reading replies aloud: the voice runs on your machine, with every voice, speed and playback control.',
-          '• Your pronunciation list (/mark-2-hud say), and skipping or reading code blocks.',
+          '• Your pronunciation list (/mk2-hud say), and skipping or reading code blocks.',
           '• The helmet, the HUD and this panel.',
           '• The stats row: turn, speed, cost, context and the session-limit reading.',
           '• The cache countdown and its alerts.',

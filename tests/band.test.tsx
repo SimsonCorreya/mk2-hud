@@ -5,7 +5,7 @@ import { missionSvg, statsCells, statsSvg, voiceSvg } from '../hooks/hud'
 import { IDLE } from '../hooks/state'
 
 const BAND = {
-  plugin: 'mark-2-hud',
+  plugin: 'mk2-hud',
   component: 'AbovePrompt',
   requestId: 'above-prompt',
   props: {
@@ -30,7 +30,7 @@ const startSession = async ($: Parameters<TestBody>[0], on: Parameters<TestBody>
 
     return <Box />
   })
-  on('command.register', () => ({ value: { command: 'mark-2-hud' } }))
+  on('command.register', () => ({ value: { command: 'mk2-hud' } }))
   on('tool.register', () => ({ value: { tool: 'progress' } }))
   on('session.start', (_, e) => ({ cwd: e.cwd }))
   await $.session.start({ cwd: '/', surface, isInteractive: true })

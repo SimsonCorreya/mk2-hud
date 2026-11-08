@@ -6,7 +6,7 @@ import { STATS, WARM } from '../hooks/state'
 import { LIMITS_PANE } from '../hooks/warm'
 
 const PANE = {
-  plugin: 'mark-2-hud',
+  plugin: 'mk2-hud',
   component: 'Pane',
   requestId: LIMITS_PANE,
   props: {
@@ -28,7 +28,7 @@ const startSession = async ($: Parameters<TestBody>[0], on: Parameters<TestBody>
 
     return <Box />
   })
-  on('command.register', () => ({ value: { command: 'mark-2-hud' } }))
+  on('command.register', () => ({ value: { command: 'mk2-hud' } }))
   on('tool.register', () => ({ value: { tool: 'progress' } }))
   on('session.start', (_, e) => ({ cwd: e.cwd }))
   await $.session.start({ cwd: '/', surface, isInteractive: true })

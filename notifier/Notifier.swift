@@ -1,7 +1,7 @@
 // Posts one system notification under this app's name and icon, and opens the URL
 // it carries when the notification is clicked.
 //
-//   mark-2-hud-notifier -title T -message M [-open URL] [-group ID]
+//   mk2-hud-notifier -title T -message M [-open URL] [-group ID]
 //
 // Exits 0 once the notification is posted, 2 when notifications are not allowed,
 // 1 when posting failed, 64 on bad usage. A later notification with the same group

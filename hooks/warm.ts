@@ -26,11 +26,11 @@ import type { EngineInterface, EventOf, Register } from 'claude-code'
 import type { Hold, Stats, Warm } from '../types'
 import { CACHE, HOLD, STATS, WARM } from './state'
 
-const cache = atom({ plugin: 'mark-2-hud', key: 'cache' } as const, CACHE)
-const hold = atom({ plugin: 'mark-2-hud', key: 'hold' } as const, HOLD)
-const isBusy = atom({ plugin: 'mark-2-hud', key: 'isBusy' } as const, false)
-const stats = atom({ plugin: 'mark-2-hud', key: 'stats' } as const, STATS)
-const warm = atom({ plugin: 'mark-2-hud', key: 'warm' } as const, WARM)
+const cache = atom({ plugin: 'mk2-hud', key: 'cache' } as const, CACHE)
+const hold = atom({ plugin: 'mk2-hud', key: 'hold' } as const, HOLD)
+const isBusy = atom({ plugin: 'mk2-hud', key: 'isBusy' } as const, false)
+const stats = atom({ plugin: 'mk2-hud', key: 'stats' } as const, STATS)
+const warm = atom({ plugin: 'mk2-hud', key: 'warm' } as const, WARM)
 
 type On = Parameters<Register>[0]
 
@@ -52,20 +52,20 @@ const RESUME_SLACK_MS = 60 * 1000
 const MIN_PING_PERCENT = 0.1
 
 // The marker that tells a ping's turn from the person's.
-export const WARM_MARK = '[mark-2-hud keep-warm]'
+export const WARM_MARK = '[mk2-hud keep-warm]'
 const PING = `${WARM_MARK} Cache keep-alive. Reply with the single word: ok. Use no tools.`
 const RESUME = 'continue'
 const PAUSE_REASON =
-  "Paused by Mark-2 HUD's shield: the session limit is nearly reached. Don't start anything new. " +
+  "Paused by Mk2-HUD's shield: the session limit is nearly reached. Don't start anything new. " +
   'In one or two short sentences, note what is done and what comes next, then end your turn. ' +
   "You'll get \"continue\" once the limit resets."
-// Mark-2 HUD's own tools stay open during a pause, so the plan bar can still be updated.
-const OPEN_TOOLS = ['mcp__mark-2-hud__progress', 'mcp__mark-2-hud__step']
+// Mk2-HUD's own tools stay open during a pause, so the plan bar can still be updated.
+const OPEN_TOOLS = ['mcp__mk2-hud__progress', 'mcp__mk2-hud__step']
 
 export const isPingText = (text: string): boolean => text.includes(WARM_MARK)
 
 // The Cache & limit panel, beside the transcript like the agents panel.
-export const LIMITS_PANE = 'mark-2-hud-limits'
+export const LIMITS_PANE = 'mk2-hud-limits'
 const LIMITS_TITLE = 'Cache & limit'
 
 export async function toggleLimits($: EngineInterface): Promise<boolean> {

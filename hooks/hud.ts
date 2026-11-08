@@ -271,7 +271,7 @@ export function voiceSvg(v: VoiceView, W: number): string {
     : p.status === 'summarizing'
       ? 'Condensing the reply into a few spoken sentences.'
       : !v.hasVoices
-        ? 'No voice installed yet: run /mark-2-hud voices.'
+        ? 'No voice installed yet: run /mk2-hud voices.'
         : v.isAuto
           ? 'New replies play by themselves.'
           : `Press play to hear Claude's last reply${v.mode === 'summary' ? ' as a summary' : ''}.`

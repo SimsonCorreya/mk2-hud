@@ -1,9 +1,9 @@
-// Mark-2 HUD: one Iron Man-style HUD above the prompt, joining three mods.
+// Mk2-HUD: one Iron Man-style HUD above the prompt, joining three mods.
 //   voice.ts      reads replies aloud (from talk-to-me)
 //   mission.tsx   the plan, task list, subagents and agents panel (from savvy-progress)
 //   telemetry.ts  turn, speed, cost, cache and context (from session-band)
 //   band.tsx      draws the band; hud.ts its rows; mascot.ts the helmet
-// One command, /mark-2-hud, steers all of it.
+// One command, /mk2-hud, steers all of it.
 
 import type { Register } from 'claude-code'
 
@@ -22,23 +22,23 @@ import { registerLimits } from './limits'
 import { MAX_PINGS, pauseNow, registerWarm, setShield, setShieldAt, setWarm, toggleLimits, warmSessionStart, warmTurnComplete } from './warm'
 
 const HELP = [
-  '/mark-2-hud reads the last reply aloud. Also:',
-  '/mark-2-hud pause | resume | stop | next | back',
-  '/mark-2-hud faster | slower | speed 1.5',
-  '/mark-2-hud summary | full (what gets read)',
-  '/mark-2-hud auto on | off (read each new reply)',
-  '/mark-2-hud code on | off (read code blocks)',
-  '/mark-2-hud voices (list voices and how to add more)',
-  '/mark-2-hud say (list how words are pronounced); say novakitai = nova kit A I (add one); say novakitai = (remove it)',
-  '/mark-2-hud learn on | off (Haiku suggests how to say new unusual words)',
-  '/mark-2-hud agents (show or hide the agents panel)',
-  '/mark-2-hud limits (show or hide the Cache & limit panel: the cache, the session and weekly limits, 🔥 keep warm and 🛡️ shield)',
-  '/mark-2-hud stats on | off (the row of turn, speed, cost, cache and context)',
-  '/mark-2-hud alerts on | off (notify before the prompt cache expires)',
-  `/mark-2-hud warm on | off (🔥 keep the prompt cache warm while you are away: a one-word ping before it expires, at most ${MAX_PINGS} in a row, paused near the session limit)`,
-  '/mark-2-hud shield on | off | now | at 85 (🛡️ pause a task before the session limit, keep the cache warm until it resets, then "continue"; it pauses by itself where what is left just covers the wait, or at 85% until a ping has been measured)',
-  '/mark-2-hud show | hide (the whole HUD)',
-  '/mark-2-hud demo <minutes> (preview the cache warning)',
+  '/mk2-hud reads the last reply aloud. Also:',
+  '/mk2-hud pause | resume | stop | next | back',
+  '/mk2-hud faster | slower | speed 1.5',
+  '/mk2-hud summary | full (what gets read)',
+  '/mk2-hud auto on | off (read each new reply)',
+  '/mk2-hud code on | off (read code blocks)',
+  '/mk2-hud voices (list voices and how to add more)',
+  '/mk2-hud say (list how words are pronounced); say novakitai = nova kit A I (add one); say novakitai = (remove it)',
+  '/mk2-hud learn on | off (Haiku suggests how to say new unusual words)',
+  '/mk2-hud agents (show or hide the agents panel)',
+  '/mk2-hud limits (show or hide the Cache & limit panel: the cache, the session and weekly limits, 🔥 keep warm and 🛡️ shield)',
+  '/mk2-hud stats on | off (the row of turn, speed, cost, cache and context)',
+  '/mk2-hud alerts on | off (notify before the prompt cache expires)',
+  `/mk2-hud warm on | off (🔥 keep the prompt cache warm while you are away: a one-word ping before it expires, at most ${MAX_PINGS} in a row, paused near the session limit)`,
+  '/mk2-hud shield on | off | now | at 85 (🛡️ pause a task before the session limit, keep the cache warm until it resets, then "continue"; it pauses by itself where what is left just covers the wait, or at 85% until a ping has been measured)',
+  '/mk2-hud show | hide (the whole HUD)',
+  '/mk2-hud demo <minutes> (preview the cache warning)',
 ].join('\n')
 
 export const register: Register = (on, options) => {
@@ -58,8 +58,8 @@ export const register: Register = (on, options) => {
     await missionSessionStart($, options)
     warmSessionStart($)
     await $.command.register({
-      name: 'mark-2-hud',
-      description: "Mark-2 HUD HUD: read Claude's last reply aloud, or steer the voice, agents panel and stats",
+      name: 'mk2-hud',
+      description: "Mk2-HUD HUD: read Claude's last reply aloud, or steer the voice, agents panel and stats",
       argumentHint: '[pause|stop|next|back|speed 1.5|summary|full|auto on|say word = how|agents|limits|stats off|warm on|shield on|show|hide|help]',
       immediate: true,
     })
@@ -100,7 +100,7 @@ export const register: Register = (on, options) => {
     await refreshTelemetry($)
   })
 
-  on('command.run', { command: 'mark-2-hud' }, async ($, e) => {
+  on('command.run', { command: 'mk2-hud' }, async ($, e) => {
     // `say` keeps its words' case and spaces, so it is read before the rest.
     const say = /^say(?:\s+([\s\S]*))?$/i.exec(e.args.trim())
     if (say !== null) return { text: await sayCommand($, say[1] ?? '') }
@@ -133,7 +133,7 @@ export const register: Register = (on, options) => {
         }
         if (value === 'at') {
           const percent = Number(e.args.trim().split(/\s+/)[2])
-          if (!Number.isFinite(percent)) return { text: 'Give the percent, as in /mark-2-hud shield at 85.' }
+          if (!Number.isFinite(percent)) return { text: 'Give the percent, as in /mk2-hud shield at 85.' }
           await setShieldAt($, percent)
           return { text: `🛡️ Pauses at ${Math.round(Math.min(97, Math.max(50, percent)))}% until a ping has been measured.` }
         }
@@ -149,7 +149,7 @@ export const register: Register = (on, options) => {
         return { text: verb === 'hide' ? 'HUD folded to the helmet.' : 'HUD shown.' }
       case 'demo': {
         const minutes = Number(value)
-        if (!Number.isFinite(minutes) || minutes <= 0) return { text: 'Give the minutes left, as in /mark-2-hud demo 8.' }
+        if (!Number.isFinite(minutes) || minutes <= 0) return { text: 'Give the minutes left, as in /mk2-hud demo 8.' }
         await demoCache($, minutes)
         await changeSettings($, () => ({ isCollapsed: false }))
         return { text: `Cache demo: ${value} min left until the next answer resets it.` }

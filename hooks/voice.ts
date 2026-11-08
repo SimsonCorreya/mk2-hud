@@ -10,10 +10,10 @@ import type { Lip, Mood } from './mascot'
 import { SPEEDS, formatSpeed, toSentences, unusualWords, voiceLabel } from './speech-text'
 import { DEFAULTS, IDLE } from './state'
 
-const lastAnswer = atom({ plugin: 'mark-2-hud', key: 'lastAnswer' } as const, '')
-const player = atom({ plugin: 'mark-2-hud', key: 'player' } as const, IDLE)
-const settings = atom({ plugin: 'mark-2-hud', key: 'settings' } as const, DEFAULTS)
-const voices = atom({ plugin: 'mark-2-hud', key: 'voices' } as const, [])
+const lastAnswer = atom({ plugin: 'mk2-hud', key: 'lastAnswer' } as const, '')
+const player = atom({ plugin: 'mk2-hud', key: 'player' } as const, IDLE)
+const settings = atom({ plugin: 'mk2-hud', key: 'settings' } as const, DEFAULTS)
+const voices = atom({ plugin: 'mk2-hud', key: 'voices' } as const, [])
 
 type On = Parameters<Register>[0]
 
@@ -187,7 +187,7 @@ async function onLine($: EngineInterface, line: string) {
   } else if (word === 'END' && isCurrent) {
     await update($, player, () => IDLE)
   } else if (word === 'ERR') {
-    $.ui.toast(`Mark-2 HUD voice: ${line.slice(4)}`)
+    $.ui.toast(`Mk2-HUD voice: ${line.slice(4)}`)
   }
 }
 
@@ -212,7 +212,7 @@ async function runSpeaker($: EngineInterface, python: string, where: Paths) {
     })
     for await (const { stream, text } of speech) {
       if (stream === 'stderr') {
-        $.ui.log(`mark-2-hud speaker: ${text}`, { to: 'debug' })
+        $.ui.log(`mk2-hud speaker: ${text}`, { to: 'debug' })
         continue
       }
       pending += text
@@ -221,7 +221,7 @@ async function runSpeaker($: EngineInterface, python: string, where: Paths) {
       for (const line of lines) await onLine($, line.trim())
     }
   } catch (error) {
-    $.ui.toast(`Mark-2 HUD could not start the Piper voice: ${errorText(error)}`)
+    $.ui.toast(`Mk2-HUD could not start the Piper voice: ${errorText(error)}`)
   } finally {
     speaker = 'off'
     await update($, player, () => IDLE)
@@ -239,7 +239,7 @@ export async function ensureSpeaker($: EngineInterface) {
   } catch (error) {
     speaker = 'off'
     await update($, player, () => IDLE)
-    $.ui.toast(`Mark-2 HUD needs uv and Piper: ${errorText(error)}`)
+    $.ui.toast(`Mk2-HUD needs uv and Piper: ${errorText(error)}`)
   }
 }
 
@@ -267,7 +267,7 @@ async function summarize($: EngineInterface, text: string): Promise<string | und
 // The words the voice says differently: Haiku's suggestions, then the
 // person's own, which win.
 export function spokenWords(chosen: HudSettings): Record<string, string> {
-  return { ...chosen.autoPronunciations, ...chosen.pronunciations }
+  return { 'mk2-hud': 'Mark 2 H U D', ...chosen.autoPronunciations, ...chosen.pronunciations }
 }
 
 const LEARN_SYSTEM = [
@@ -337,7 +337,7 @@ export async function play($: EngineInterface, text: string) {
   const where = paths
   if (where === undefined) return
   if ((await read($, voices)).length === 0 && (await loadVoices($)).length === 0) {
-    $.ui.toast(`No Piper voices in ${where.voices}. Run /mark-2-hud voices to see how to add one.`)
+    $.ui.toast(`No Piper voices in ${where.voices}. Run /mk2-hud voices to see how to add one.`)
 
     return
   }
@@ -480,7 +480,7 @@ export function helmetOf(then: VoicePlayer, isWorking: boolean): { mood: Mood; l
   return { mood, lip }
 }
 
-// `/mark-2-hud say` lists the pronunciations, the person's and Haiku's; `say <word>
+// `/mk2-hud say` lists the pronunciations, the person's and Haiku's; `say <word>
 // = <how>` sets one as the person's own, `say <word> =` has the word read as
 // written. Either way Haiku's suggestion for it goes and it is not asked again.
 export async function sayCommand($: EngineInterface, args: string): Promise<string> {
@@ -491,22 +491,22 @@ export async function sayCommand($: EngineInterface, args: string): Promise<stri
     const learned = Object.entries(chosen.autoPronunciations)
     if (yours.length === 0 && learned.length === 0) {
       return chosen.isLearningWords
-        ? 'No pronunciations yet. Haiku adds them as replies bring new words; set one yourself with /mark-2-hud say novakitai = nova kit A I'
-        : 'No pronunciations yet. Add one with /mark-2-hud say novakitai = nova kit A I'
+        ? 'No pronunciations yet. Haiku adds them as replies bring new words; set one yourself with /mk2-hud say novakitai = nova kit A I'
+        : 'No pronunciations yet. Add one with /mk2-hud say novakitai = nova kit A I'
     }
     const list = (entries: [string, string][]) => entries.map(([word, said]) => `  ${word} = ${said}`)
 
     return [
       ...(yours.length > 0 ? ['Yours:', ...list(yours)] : []),
-      ...(learned.length > 0 ? ['Learned by Haiku (change or remove any with /mark-2-hud say):', ...list(learned)] : []),
-      chosen.isLearningWords ? '' : 'Learning new words is off: /mark-2-hud learn on',
+      ...(learned.length > 0 ? ['Learned by Haiku (change or remove any with /mk2-hud say):', ...list(learned)] : []),
+      chosen.isLearningWords ? '' : 'Learning new words is off: /mk2-hud learn on',
     ]
       .filter(line => line !== '')
       .join('\n')
   }
 
   const match = /^([\p{L}\p{N}'-]+)\s*(?:=\s*(.*))?$/u.exec(text)
-  if (match === null) return 'Write it as /mark-2-hud say <word> = <how to say it>, one word at a time.'
+  if (match === null) return 'Write it as /mk2-hud say <word> = <how to say it>, one word at a time.'
   const word = (match[1] ?? '').toLowerCase()
   const said = (match[2] ?? '').trim()
   if (match[2] === undefined) {
@@ -532,7 +532,7 @@ export async function sayCommand($: EngineInterface, args: string): Promise<stri
   return `"${word}" will be read as "${said}".`
 }
 
-// `/mark-2-hud <verb> <value>` for the voice; undefined when the verb is not one.
+// `/mk2-hud <verb> <value>` for the voice; undefined when the verb is not one.
 export async function voiceCommand($: EngineInterface, verb: string, value: string): Promise<string | undefined> {
   const isOn = value === 'on' || value === ''
 
@@ -581,7 +581,7 @@ export async function voiceCommand($: EngineInterface, verb: string, value: stri
     case 'learn':
       await changeSettings($, () => ({ isLearningWords: isOn }))
       return isOn
-        ? 'Haiku will suggest how to say new unusual words before each reading. See them with /mark-2-hud say.'
+        ? 'Haiku will suggest how to say new unusual words before each reading. See them with /mk2-hud say.'
         : 'New words are no longer put to Haiku; the pronunciations already learned stay.'
     case 'voices': {
       const names = await loadVoices($)
@@ -590,7 +590,7 @@ export async function voiceCommand($: EngineInterface, verb: string, value: stri
         listed,
         `Voices live in ${voicesFolder()}.`,
         'To add one, download its .onnx and .onnx.json files from',
-        'https://huggingface.co/rhasspy/piper-voices into that folder, then run /mark-2-hud voices again.',
+        'https://huggingface.co/rhasspy/piper-voices into that folder, then run /mk2-hud voices again.',
       ].join('\n')
     }
     default:

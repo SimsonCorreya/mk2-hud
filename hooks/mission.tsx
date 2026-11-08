@@ -9,18 +9,18 @@ import type { AgentRun, Flow, Panel, Phase, PlannedTask, TaskItem } from '../typ
 import { PANEL } from './state'
 import { isPingText } from './warm'
 
-const agents = atom({ plugin: 'mark-2-hud', key: 'agents' } as const, [])
-const flow = atom({ plugin: 'mark-2-hud', key: 'flow' } as const, null)
-const now = atom({ plugin: 'mark-2-hud', key: 'now' } as const, 0)
-const panel = atom({ plugin: 'mark-2-hud', key: 'panel' } as const, PANEL)
-const taskList = atom({ plugin: 'mark-2-hud', key: 'taskList' } as const, [])
+const agents = atom({ plugin: 'mk2-hud', key: 'agents' } as const, [])
+const flow = atom({ plugin: 'mk2-hud', key: 'flow' } as const, null)
+const now = atom({ plugin: 'mk2-hud', key: 'now' } as const, 0)
+const panel = atom({ plugin: 'mk2-hud', key: 'panel' } as const, PANEL)
+const taskList = atom({ plugin: 'mk2-hud', key: 'taskList' } as const, [])
 
 type On = Parameters<Register>[0]
 type Options = Parameters<Register>[1]
 
-export const TOOL = 'mcp__mark-2-hud__progress'
-const STEP_TOOL = 'mcp__mark-2-hud__step'
-export const PANE = 'mark-2-hud-agents'
+export const TOOL = 'mcp__mk2-hud__progress'
+const STEP_TOOL = 'mcp__mk2-hud__step'
+export const PANE = 'mk2-hud-agents'
 const PHASES: readonly Phase[] = ['plan', 'design', 'delegate', 'review', 'close']
 
 type ProgressInput = {
@@ -742,7 +742,7 @@ export function registerMission(on: On, options: Options): void {
     const hasTaskList = e.tools.some(t => TASK_TOOLS.includes(t))
     if (options.planReports === false || hasTaskList || !e.tools.includes(TOOL)) return composed
     return {
-      sections: [...composed.sections, { id: 'mark-2-hud:plans', text: PLAN_PROMPT, scope: 'session' as const }],
+      sections: [...composed.sections, { id: 'mk2-hud:plans', text: PLAN_PROMPT, scope: 'session' as const }],
     }
   })
 

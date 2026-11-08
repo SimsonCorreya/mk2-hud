@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
   <key>CFBundleIdentifier</key>
-  <string>dev.mark-2-hud.notifier</string>
+  <string>dev.mk2-hud.notifier</string>
   <key>CFBundleName</key>
-  <string>Mark-2 HUD</string>
+  <string>Mk2-HUD</string>
   <key>CFBundleExecutable</key>
-  <string>mark-2-hud-notifier</string>
+  <string>mk2-hud-notifier</string>
   <key>CFBundleIconFile</key>
   <string>AppIcon</string>
   <key>CFBundlePackageType</key>

@@ -28,7 +28,7 @@ test('pinging pauses near the session or weekly limit, until that limit resets',
 })
 
 test("a ping's turn is told from the person's by its marker", async () => {
-  expect(isPingText(`The mark-2-hud plugin sent a message: ${WARM_MARK} Cache keep-alive.`)).toBe(true)
+  expect(isPingText(`The mk2-hud plugin sent a message: ${WARM_MARK} Cache keep-alive.`)).toBe(true)
   expect(isPingText('keep the cache warm please')).toBe(false)
 })
 

@@ -1,8 +1,10 @@
-# Mark-2 HUD
+# Mk2-HUD
+
+*Pronounced "Mark 2 H U D".*
 
 A heads-up display above the [Claude Code](https://claude.com/claude-code) prompt. It reads Claude's replies aloud in a local neural voice, shows the plan as it progresses, and keeps turn, cost, prompt cache and context in view.
 
-![Mark-2 HUD above the prompt: a helmet mascot beside the mission plates, telemetry cells and voice controls](docs/preview.png)
+![Mk2-HUD above the prompt: a helmet mascot beside the mission plates, telemetry cells and voice controls](docs/preview.png)
 
 *Mockup drawn with the HUD's own rendering code. The numbers and text are examples.*
 
@@ -25,24 +27,24 @@ The helmet sits beside three rows. Its mouth moves with the voice.
 You need [uv](https://docs.astral.sh/uv/getting-started/installation/), which sets up the voice engine the first time it is used. Then, at the prompt of a terminal session:
 
 ```
-/plugin install mark-2-hud --marketplace SimsonCorreya/mark-2-hud
+/plugin install mk2-hud --marketplace SimsonCorreya/mk2-hud
 ```
 
 Answer `y` to add the marketplace, then pick a scope. From a shell:
 
 ```bash
-claude plugin install mark-2-hud --marketplace SimsonCorreya/mark-2-hud
+claude plugin install mk2-hud --marketplace SimsonCorreya/mk2-hud
 ```
 
-In the desktop app: click **+** next to the prompt box, then **Plugins**, **Add marketplace** with `SimsonCorreya/mark-2-hud`, then **Add plugin**.
+In the desktop app: click **+** next to the prompt box, then **Plugins**, **Add marketplace** with `SimsonCorreya/mk2-hud`, then **Add plugin**.
 
 ### Add a voice
 
-The voice needs at least one Piper model. Run `/mark-2-hud voices` to see the folder, then download a voice's `.onnx` and `.onnx.json` files from [rhasspy/piper-voices](https://huggingface.co/rhasspy/piper-voices) into it. On Windows the folder is `%LOCALAPPDATA%\claude-read-aloud\voices`; on macOS and Linux it is `~/.local/share/claude-read-aloud/voices`.
+The voice needs at least one Piper model. Run `/mk2-hud voices` to see the folder, then download a voice's `.onnx` and `.onnx.json` files from [rhasspy/piper-voices](https://huggingface.co/rhasspy/piper-voices) into it. On Windows the folder is `%LOCALAPPDATA%\claude-read-aloud\voices`; on macOS and Linux it is `~/.local/share/claude-read-aloud/voices`.
 
 ## Commands
 
-`/mark-2-hud` reads the last reply aloud. Also:
+`/mk2-hud` reads the last reply aloud. Also:
 
 | Command | What it does |
 |---|---|
@@ -78,7 +80,7 @@ No analytics, and no servers of its own.
 
 **Downloaded:** the first time the voice is used, `uv` installs Piper and its Python dependencies.
 
-**Added to Claude:** two tools, `mcp__mark-2-hud__progress` and `mcp__mark-2-hud__step`, so Claude can report its plan. A short note in the system prompt asks it to do so. Turn this off with the `planReports` setting, and the Mission row will follow only task lists and subagents.
+**Added to Claude:** two tools, `mcp__mk2-hud__progress` and `mcp__mk2-hud__step`, so Claude can report its plan. A short note in the system prompt asks it to do so. Turn this off with the `planReports` setting, and the Mission row will follow only task lists and subagents.
 
 Everything is in this repository, so you can read exactly what runs: `hooks/` is the HUD and `scripts/speaker.py` is the voice.
 
@@ -90,7 +92,7 @@ On a Mac, cache warnings can be native notifications that open the session when 
 bash notifier/build.sh
 ```
 
-Without it, or on Windows and Linux, Mark-2 HUD uses Claude Code's own notification.
+Without it, or on Windows and Linux, Mk2-HUD uses Claude Code's own notification.
 
 ## Licence
 

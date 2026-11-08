@@ -8,11 +8,11 @@ import type { EngineInterface, EventOf, Register } from 'claude-code'
 import { CACHE, DEFAULTS, STATS } from './state'
 import { warmTurnStart } from './warm'
 
-const cache = atom({ plugin: 'mark-2-hud', key: 'cache' } as const, CACHE)
-const isBusy = atom({ plugin: 'mark-2-hud', key: 'isBusy' } as const, false)
-const settings = atom({ plugin: 'mark-2-hud', key: 'settings' } as const, DEFAULTS)
-const stats = atom({ plugin: 'mark-2-hud', key: 'stats' } as const, STATS)
-const warned = atom({ plugin: 'mark-2-hud', key: 'warned' } as const, 0)
+const cache = atom({ plugin: 'mk2-hud', key: 'cache' } as const, CACHE)
+const isBusy = atom({ plugin: 'mk2-hud', key: 'isBusy' } as const, false)
+const settings = atom({ plugin: 'mk2-hud', key: 'settings' } as const, DEFAULTS)
+const stats = atom({ plugin: 'mk2-hud', key: 'stats' } as const, STATS)
+const warned = atom({ plugin: 'mk2-hud', key: 'warned' } as const, 0)
 
 type On = Parameters<Register>[0]
 
@@ -60,7 +60,7 @@ async function refresh($: EngineInterface) {
 }
 
 // Built by notifier/build.sh (macOS): posts the warning under the HUD's name.
-const NOTIFIER = 'notifier/Mark-2 HUD.app/Contents/MacOS/mark-2-hud-notifier'
+const NOTIFIER = 'notifier/Mk2-HUD.app/Contents/MacOS/mk2-hud-notifier'
 // The desktop app's id for a local Code session, as its claude:// links take it.
 const HOST_SESSION = /^local_[A-Za-z0-9-]{1,64}$/
 
@@ -101,7 +101,7 @@ async function notifyCacheExpiry($: EngineInterface, minutes: number) {
       '-message',
       message,
       '-group',
-      `mark-2-hud-${session?.id ?? (await $.session.id())}`,
+      `mk2-hud-${session?.id ?? (await $.session.id())}`,
       ...(session ? ['-open', `claude://code/continue?session=${session.id}`] : []),
     ]
     // The first run waits while macOS asks whether to allow its notifications.
@@ -122,7 +122,7 @@ async function notifyCacheExpiry($: EngineInterface, minutes: number) {
   if (!isDelivered) $.ui.toast(`⏳ ${text}`, { timeoutMs: 30000 })
 }
 
-// `/mark-2-hud demo <minutes>` fakes the cache deadline to preview the warnings;
+// `/mk2-hud demo <minutes>` fakes the cache deadline to preview the warnings;
 // the next answer resets it.
 export async function demoCache($: EngineInterface, minutes: number): Promise<void> {
   const seconds = Math.round(minutes * 60)

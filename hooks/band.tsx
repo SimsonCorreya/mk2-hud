@@ -28,19 +28,19 @@ import {
 } from './voice'
 import { MAX_PINGS, pressShield, toggleLimits, toggleWarm, triggerPoint } from './warm'
 
-const agents = atom({ plugin: 'mark-2-hud', key: 'agents' } as const, [])
-const cache = atom({ plugin: 'mark-2-hud', key: 'cache' } as const, CACHE)
-const flow = atom({ plugin: 'mark-2-hud', key: 'flow' } as const, null)
-const player = atom({ plugin: 'mark-2-hud', key: 'player' } as const, IDLE)
-const settings = atom({ plugin: 'mark-2-hud', key: 'settings' } as const, DEFAULTS)
-const stats = atom({ plugin: 'mark-2-hud', key: 'stats' } as const, STATS)
-const voices = atom({ plugin: 'mark-2-hud', key: 'voices' } as const, [])
-const warm = atom({ plugin: 'mark-2-hud', key: 'warm' } as const, WARM)
-const hold = atom({ plugin: 'mark-2-hud', key: 'hold' } as const, HOLD)
+const agents = atom({ plugin: 'mk2-hud', key: 'agents' } as const, [])
+const cache = atom({ plugin: 'mk2-hud', key: 'cache' } as const, CACHE)
+const flow = atom({ plugin: 'mk2-hud', key: 'flow' } as const, null)
+const player = atom({ plugin: 'mk2-hud', key: 'player' } as const, IDLE)
+const settings = atom({ plugin: 'mk2-hud', key: 'settings' } as const, DEFAULTS)
+const stats = atom({ plugin: 'mk2-hud', key: 'stats' } as const, STATS)
+const voices = atom({ plugin: 'mk2-hud', key: 'voices' } as const, [])
+const warm = atom({ plugin: 'mk2-hud', key: 'warm' } as const, WARM)
+const hold = atom({ plugin: 'mk2-hud', key: 'hold' } as const, HOLD)
 
 type On = Parameters<Register>[0]
 
-// The tray's speeds: the common ones; /mark-2-hud speed reaches the rest.
+// The tray's speeds: the common ones; /mk2-hud speed reaches the rest.
 const TRAY_SPEEDS = [0.75, 1, 1.25, 1.5, 2] as const
 
 // Rough pixels per reported column, and what each row's buttons take, so each
@@ -54,7 +54,7 @@ const MENU_BUTTONS = 100
 const TRANSPORT = 190
 const PLAY_BUTTON = 60
 
-// The last width the band was drawn at, for `/mark-2-hud width` while tuning.
+// The last width the band was drawn at, for `/mk2-hud width` while tuning.
 let lastWidth = { columns: 0, inner: 0 }
 export const bandWidth = () => lastWidth
 
@@ -127,7 +127,7 @@ export function registerBand(on: On): void {
           <Box flexDirection="column">
             {below}
             <Box flexDirection="row" alignItems="center" columnGap="sm">
-              <Text color={HUD.cyan}>◉ Mark-2 HUD</Text>
+              <Text color={HUD.cyan}>◉ Mk2-HUD</Text>
               {isReading && <Button key="pause" hotkey="p" label={pauseLabel} onPress={() => togglePause($)} />}
               {isReading && <Text dimColor>{position}</Text>}
               {!e.props.hasSurvey && <Button key="expand" plain label="Show" onPress={() => collapse(false)} />}
@@ -201,7 +201,7 @@ export function registerBand(on: On): void {
     // a new sentence swaps the picture without the frame reloading, which
     // blanked the helmet for a moment between sentences.
     const helmet = (size: number) => (
-      <Svg source={mascotSvg(mood, lip, then.take, at)} alt={`Mark-2 HUD helmet, ${mood}`} width={size} height={size} />
+      <Svg source={mascotSvg(mood, lip, then.take, at)} alt={`Mk2-HUD helmet, ${mood}`} width={size} height={size} />
     )
 
     // A survey (the end-of-turn box among them) holds the band, and × folds
@@ -348,7 +348,7 @@ export function registerBand(on: On): void {
             )
           ) : (
             <Text key="voice" color={HUD.muted}>
-              {voiceNames.length === 1 ? `Voice: ${voiceLabel(voice)}` : 'No voice installed: /mark-2-hud voices'}
+              {voiceNames.length === 1 ? `Voice: ${voiceLabel(voice)}` : 'No voice installed: /mk2-hud voices'}
             </Text>
           )}
         </Box>

@@ -1,7 +1,7 @@
 {
-  "name": "mark-2-hud",
+  "name": "mk2-hud",
   "version": "1.0.0",
-  "description": "Mark-2 HUD: a heads-up display above the Claude Code prompt. Reads Claude's replies aloud with a local Piper voice, tracks the plan and its subagents, and shows turn, speed, cost, prompt cache and context.",
+  "description": "Mk2-HUD: a heads-up display above the Claude Code prompt. Reads Claude's replies aloud with a local Piper voice, tracks the plan and its subagents, and shows turn, speed, cost, prompt cache and context.",
   "types": "./types/index.d.ts",
   "userConfig": {
     "planReports": {
@@ -15,6 +15,6 @@
     "name": "Simson Correya"
   },
   "license": "MIT",
-  "repository": "https://github.com/SimsonCorreya/mark-2-hud",
-  "homepage": "https://github.com/SimsonCorreya/mark-2-hud"
+  "repository": "https://github.com/SimsonCorreya/mk2-hud",
+  "homepage": "https://github.com/SimsonCorreya/mk2-hud"
 }

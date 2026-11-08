@@ -1,11 +1,11 @@
 {
-  "name": "mark-2-hud",
+  "name": "mk2-hud",
   "owner": {
     "name": "Simson Correya"
   },
   "plugins": [
     {
-      "name": "mark-2-hud",
+      "name": "mk2-hud",
       "source": "./"
     }
   ]
